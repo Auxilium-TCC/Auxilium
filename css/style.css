@@ -1,0 +1,1407 @@
+@font-face {
+  font-family: Lobster;
+  src: url(fonts/lobster.woff2) format(woff2);
+}
+/*----------------------------------------*/
+/* Padrão de CSS
+/*----------------------------------------*/
+
+html,
+body {
+	height: 100%;
+	font-family: 'Raleway', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	font-weight: 600;
+	color: #474747;
+}
+
+h1 {
+	font-size: 70px;
+}
+
+h2 {
+	font-size: 36px;
+}
+
+h3 {
+	font-size: 30px;
+}
+
+h4 {
+	font-size: 24px;
+}
+
+h5 {
+	font-size: 20px;
+}
+
+h6 {
+	font-size: 16px;
+}
+
+p {
+	font-size: 14.1px;
+	color: #878787;
+	line-height: 2.2;
+	font-weight: 500;
+}
+
+img {
+	max-width: 100%;
+}
+
+input:focus,
+select:focus,
+button:focus,
+textarea:focus {
+	outline: none;
+}
+
+::-webkit-input-placeholder {
+	font-style: italic;
+}
+
+::-ms-input-placeholder {
+	font-style: italic;
+}
+
+:-ms-input-placeholder {
+	font-style: italic;
+}
+
+::placeholder {
+	font-style: italic;
+}
+
+a:hover {
+	color: #ff712f;
+}
+
+a:hover,
+a:focus {
+	text-decoration: none;
+	outline: none;
+}
+
+ul,
+ol {
+	padding: 0;
+	margin: 0;
+}
+
+/*---------------------
+  Ajuda (possíveis gambiarras)
+-----------------------*/
+
+.section-title {
+	text-align: center;
+	padding: 0 110px;
+	margin-bottom: 110px;
+}
+
+.section-title h2 {
+	font-size: 48px;
+	font-weight: 600;
+	margin-bottom: 25px;
+}
+
+.section-title p {
+	margin-bottom: 0;
+	font-weight: 500;
+}
+
+.set-bg {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: top center;
+}
+
+.spad {
+	padding-top: 115px;
+	padding-bottom: 115px;
+}
+
+.text-white h1,
+.text-white h2,
+.text-white h3,
+.text-white h4,
+.text-white h5,
+.text-white h6,
+.text-white p,
+.text-white span,
+.text-white li,
+.text-white a {
+	color: #fff;
+}
+
+
+/*---------------------
+  Elementos Comuns em um Site
+-----------------------*/
+
+/* Botões */
+
+.site-btn {
+	display: inline-block;
+	min-width: 196px;
+	text-align: center;
+	border: none;
+	padding: 15px 10px;
+	font-weight: 600;
+	font-size: 16px;
+	position: relative;
+	color: #fff;
+	cursor: pointer;
+	background: #2bcbbf;
+}
+
+.site-btn:hover {
+	color: #646464;
+}
+
+.site-btn.btn-dark {
+	background: #000;
+}
+
+
+
+
+.text-logo{
+	font-family: Lobster;
+	font-size: 3em;
+	color: #fff;
+}
+
+
+/* Rodinha do Inicio */
+
+#preloder {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 999999;
+	background: #fff;
+}
+
+.loader {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -13px;
+	margin-left: -13px;
+	border-radius: 60px;
+	animation: loader 0.8s linear infinite;
+	-webkit-animation: loader 0.8s linear infinite;
+}
+
+@keyframes loader {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+		border: 4px solid #ff712f;
+		border-left-color: transparent;
+	}
+	50% {
+		-webkit-transform: rotate(180deg);
+		transform: rotate(180deg);
+		border: 4px solid #2bcbbf;
+		border-left-color: transparent;
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+		border: 4px solid #ff712f;
+		border-left-color: transparent;
+	}
+}
+
+@-webkit-keyframes loader {
+	0% {
+		-webkit-transform: rotate(0deg);
+		border: 4px solid #ff712f;
+		border-left-color: transparent;
+	}
+	50% {
+		-webkit-transform: rotate(180deg);
+		border: 4px solid #2bcbbf;
+		border-left-color: transparent;
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		border: 4px solid #ff712f;
+		border-left-color: transparent;
+	}
+}
+
+/*------------------
+  Cabeçalho
+---------------------*/
+
+.header-section {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+	padding-top: 60px;
+}
+
+.site-logo {
+	display: inline-block;
+}
+
+.main-menu ul {
+	list-style: none;
+}
+
+.main-menu ul li {
+	display: inline;
+}
+
+.main-menu ul li a {
+	display: inline-block;
+	font-size: 16px;
+	color: #fff;
+	margin-left: 45px;
+	font-weight: 600;
+	padding: 20px 0 5px;
+}
+
+.main-menu ul li a:hover {
+	color: #2bcbbf;
+}
+
+.header-btn {
+	float: right;
+	margin-right: 0;
+}
+
+.nav-switch {
+	display: none;
+}
+
+/*------------------
+  Introdução
+---------------------*/
+
+.hero-section {
+	height: 948px;
+}
+
+.hero-section-curse {
+	height: 600px;
+}
+
+.hero-text {
+	text-align: center;
+	padding-top: 300px;
+	margin-bottom: 105px;
+}
+
+.hero-text h2 {
+	font-size: 60px;
+	font-weight: 500;
+	margin-bottom: 20px;
+}
+
+/*------------------
+  História da Auxilium
+---------------------*/
+
+.history-page{
+}
+.history-page .color-bg{
+	background-image: url(../img/bg-orange.jpg);
+}
+.history-page .history-content {
+	background-color: #fff;
+	padding: 70px;
+} 
+
+/*------------------
+  Cursos da Auxilium
+---------------------*/
+
+.curse-page{
+}
+.curse-page .color-bg{
+	background-image: url(../img/curso2.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.curse-page .curse-content {
+	background-color: #fff;
+	padding: 80px;
+} 
+.curse-content .contact-list {
+	list-style: none;
+	padding-left: 50px;
+}
+.curse-content .contact-list li {
+	margin-bottom: 27px;
+	position: relative;
+	padding-left: 10px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #878787;
+}
+.curse-content .contact-list li:last-child {
+	margin-bottom: 0;
+}
+.curse-content .contact-list li:after {
+	position: absolute;
+	content: "";
+	width: 8px;
+	height: 8px;
+	left: -5px;
+	top: 6px;
+	border-radius: 50%;
+	background: #ff712f;
+}
+.curse-content a{
+	margin-top: 30px; 
+	color: #fff;
+}
+.curse-btn{
+	color: #fff;
+}
+/*------------------
+  Inspiração
+---------------------*/
+.inpiration-page{
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
+}
+.embed {
+	position: relative;
+	width: 100%;
+	padding-bottom: 56.25%;
+}
+
+.embed .video div{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.inpiration-page .col-lg-8 {
+	background-image: url(../img/bg-orange.jpg);
+	padding: 40px;
+	height: 500px;
+	margin: 50px auto;
+}
+
+/*------------------
+  Entrar em Contato
+---------------------*/
+
+
+.signup-form,
+.contact-form {
+	background: #fff;
+	padding: 60px;
+}
+
+.signup-form input[type=text],
+.signup-form input[type=email],
+.signup-form textarea,
+.contact-form input[type=text],
+.contact-form input[type=email],
+.contact-form textarea {
+	height: 57px;
+	width: 100%;
+	padding: 0 30px;
+	margin-bottom: 27px;
+	float: left;
+	border: none;
+	font-size: 14px;
+	font-weight: 500;
+	background: #edf4f6;
+}
+
+.signup-form input[type=text]:focus,
+.signup-form input[type=email]:focus,
+.signup-form textarea:focus,
+.contact-form input[type=text]:focus,
+.contact-form input[type=email]:focus,
+.contact-form textarea:focus {
+	border-bottom: 2px solid #ff712f;
+}
+
+.signup-form input[type=file],
+.contact-form input[type=file] {
+	display: none;
+}
+
+.signup-form textarea,
+.contact-form textarea {
+	padding-top: 23px;
+	padding-bottom: 15px;
+	height: 225px;
+}
+
+.signup-form .site-btn,
+.contact-form .site-btn {
+	padding: 17px 10px;
+}
+
+.contact-page{
+	background: #f5f5f5;
+}
+
+.contact-form-warp {
+	background: url(../img/bg-orange.jpg);
+	padding: 45px 47px;
+}
+
+.contact-form-warp .section-title {
+	padding: 0 15px;
+	margin-bottom: 40px;
+}
+
+.contact-form-warp .contact-form {
+	padding: 69px 40px 47px;
+}
+
+.contact-info-area {
+	padding-top: 60px;
+}
+
+.contact-info-area .section-title {
+	margin-bottom: 40px;
+}
+
+.contact-info-area .section-title h2 {
+	margin-bottom: 40px;
+	color: #2bcbbf;
+	font-size: 40px;
+}
+
+.contact-info-area .phone-number {
+	margin-bottom: 50px;
+}
+
+.contact-info-area .phone-number span {
+	font-size: 18px;
+	font-weight: 700;
+	color: #ff712f;
+	display: block;
+	margin-bottom: 5px;
+}
+
+.contact-info-area .phone-number h2 {
+	color: #2bcbbf;
+	display: inline-block;
+	position: relative;
+	padding: 0 0 10px;
+	padding-right: 12px;
+}
+
+.contact-info-area .phone-number h2:after {
+	position: absolute;
+	content: "";
+	width: 100%;
+	height: 3px;
+	left: 0;
+	bottom: 0;
+	background: #ff712f;
+}
+
+.contact-info-area .contact-list {
+	list-style: none;
+	padding-left: 50px;
+}
+
+.contact-info-area .contact-list li {
+	margin-bottom: 27px;
+	position: relative;
+	padding-left: 10px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #878787;
+}
+
+.contact-info-area .contact-list li:last-child {
+	margin-bottom: 0;
+}
+
+.contact-info-area .contact-list li:after {
+	position: absolute;
+	content: "";
+	width: 8px;
+	height: 8px;
+	left: -5px;
+	top: 6px;
+	border-radius: 50%;
+	background: #ff712f;
+}
+
+/*------------------
+  Cabeçalho
+---------------------*/
+
+.footer-section {
+	margin-top: -50px;
+}
+
+.footer-warp {
+	max-width: 1559px;
+	padding: 0 30px;
+	margin: 0 auto;
+}
+
+.footer-bottom {
+	overflow: hidden;
+	background: #ff712f;
+	padding: 20px 0;
+	margin-top: 50px;
+}
+
+.footer-menu {
+	list-style: none;
+	float: right;
+}
+
+.footer-menu li {
+	display: inline;
+}
+
+.footer-menu li:last-child a {
+	padding-right: 0;
+	margin-right: 0;
+}
+
+.footer-menu li:last-child a:after {
+	display: none;
+}
+
+.footer-menu li a {
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 600;
+	color: #fff;
+	padding-right: 10px;
+	margin-right: 10px;
+	position: relative;
+}
+
+.footer-menu li a:after {
+	position: absolute;
+	content: "|";
+	right: 0;
+	top: 0;
+}
+
+.copyright {
+	padding-top: 3px;
+	float: left;
+	font-size: 16px;
+	font-weight: 600;
+	color: #fff;
+}
+
+
+/* Rodinha do Inicio */
+
+.circle-progress {
+	text-align: center;
+	display: block;
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.circle-progress canvas {
+	-webkit-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.circle-progress .progress-info {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	margin-top: -45px;
+}
+
+.circle-progress .progress-info h2 {
+	font-weight: 700;
+	margin-bottom: 5px;
+}
+
+.circle-progress .progress-info p {
+	font-size: 14px;
+	margin-bottom: 0;
+}
+
+.fact-item h2 {
+	font-size: 60px;
+	color: #ff712f;
+}
+
+.icon-box h5 {
+	margin-bottom: 20px;
+}
+
+.icon-box h5 span {
+	font-size: 60px;
+	color: #ff712f;
+	margin-right: 15px;
+}
+
+
+/*------------------
+  Curso.php
+---------------------*/
+.element {
+	margin-bottom: 110px;
+}
+
+.accordion-area .panel {
+	margin-bottom: 18px;
+}
+
+.accordion-area .panel-link:after {
+	content: "+";
+	position: absolute;
+	font-size: 18px;
+	font-weight: 700;
+	right: 25px;
+	top: 50%;
+	color: #000;
+	line-height: 16px;
+	margin-top: -8px;
+	margin-left: -4px;
+}
+
+.accordion-area .panel-link {
+	text-align: left;
+	background-color: transparent;
+	border: none;
+	position: relative;
+	width: 100%;
+	padding: 15px 40px;
+	padding-left: 30px;
+	font-size: 16px;
+	font-weight: 600;
+	background: #e4edef;
+	color: #1f1f1f;
+}
+
+.accordion-area .panel-header .panel-link.active {
+	background: #2bcbbf;
+	color: #1d1d1d;
+}
+
+.accordion-area .panel-header .panel-link.collapsed {
+	background: #ff712f;
+	color: #fff;
+}
+
+.accordion-area .panel-header .panel-link.collapsed:after {
+	content: "+";
+	color: #1d1d1d;
+}
+
+.accordion-area .panel-link.active:after {
+	content: "-";
+	margin-top: -10px;
+	color: #fff;
+}
+
+.accordion-area .panel-link::click{
+	background: #ff712f;
+	color: #1f1f1f;
+}
+
+.accordion-area .panel-body p {
+	margin-bottom: 0;
+	padding-top: 35px;
+}
+
+.accordion-area .panel-body {
+	padding: 0 5px;
+}
+
+.blog-page {
+}
+
+.blog-post {
+	margin-bottom: 70px;
+}
+
+.blog-post h3 {
+	padding-top: 58px;
+	margin-bottom: 15px;
+}
+
+.blog-post p {
+	font-weight: 500;
+	font-size: 14px;
+	margin-bottom: 25px;
+}
+
+.blog-post .blog-metas {
+	margin-bottom: 15px;
+}
+
+.blog-post .blog-metas .blog-meta {
+	display: inline-block;
+	padding: 9px 15px;
+	position: relative;
+	margin-bottom: 5px;
+}
+
+.blog-post .blog-metas .blog-meta:last-child:after {
+	display: none;
+}
+
+.blog-post .blog-metas .blog-meta:after {
+	position: absolute;
+	content: "";
+	width: 2px;
+	height: 30px;
+	right: 0;
+	top: calc(50% - 15px);
+	background: #c5ced0;
+}
+
+.blog-post .blog-metas .blog-meta.author {
+	position: relative;
+	padding-left: 50px;
+}
+
+.blog-post .blog-metas .blog-meta.author .post-author {
+	position: absolute;
+	width: 34px;
+	height: 34px;
+	left: 0;
+	top: calc(50% - 17px);
+	border-radius: 50%;
+	float: left;
+	margin-right: 5px;
+}
+
+.blog-post .blog-metas .blog-meta a {
+	font-size: 14px;
+	font-weight: 600;
+	color: #878787;
+}
+
+.blog-post .site-btn.readmore {
+	min-width: 172px;
+}
+.sb-widget-item {
+	margin-bottom: 75px;
+}
+
+.sb-widget-item .sb-w-title {
+	margin-bottom: 50px;
+}
+
+.sb-widget-item .search-widget {
+	position: relative;
+}
+
+.sb-widget-item .search-widget input {
+	width: 100%;
+	height: 57px;
+	background: #edf4f6;
+	font-size: 12px;
+	padding: 5px 24px;
+	padding-right: 55px;
+	border: none;
+}
+
+.sb-widget-item .search-widget button {
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-color: transparent;
+	border: none;
+	color: #c5ced0;
+	height: 100%;
+	width: 50px;
+	cursor: pointer;
+}
+
+.sb-widget-item ul {
+	list-style: none;
+	padding-left: 33px;
+}
+
+.sb-widget-item ul li {
+	display: block;
+	margin-bottom: 12px;
+}
+
+.sb-widget-item ul li:last-child {
+	margin-bottom: 0;
+}
+
+.sb-widget-item ul li a {
+	color: #9e9e9e;
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.sb-widget-item ul li a:hover {
+	color: #ff712e;
+}
+
+.sb-widget-item .tags a {
+	font-size: 16px;
+	display: inline-block;
+	padding: 9px 24px;
+	color: #fff;
+	background: #ff712e;
+	margin-bottom: 10px;
+	margin-right: 6px;
+	font-weight: 500;
+}
+
+
+/*------------------
+  cursos.php
+---------------------*/
+
+.course-warp {
+	max-width: 1559px;
+	padding: 0 15px;
+	margin: 0 auto 30px;
+}
+
+.course-item {
+	margin-bottom: 30px;
+}
+
+.course-item .course-thumb {
+	height: 270px;
+}
+
+.course-item .course-thumb .price {
+	font-size: 14px;
+	color: #fff;
+	font-weight: 600;
+	background: #ff712e;
+	display: inline-block;
+	padding: 13px 19px;
+	margin: 14px;
+	opacity: 0.8;
+}
+
+.course-item .course-info {
+	background: #f5f5f5;
+}
+
+.course-item .course-info .course-text {
+	padding: 45px 33px 25px;
+}
+
+.course-item .course-info .course-text h5 {
+	margin-bottom: 5px;
+}
+
+.course-item .course-info .course-text .students {
+	font-size: 18px;
+	font-weight: 600;
+	color: #2bcbbf;
+}
+
+.course-item .course-info .course-author {
+	border-top: 1px solid #d4dee1;
+	padding: 14px;
+	overflow: hidden;
+	background-color: #ff712e;
+	
+}
+
+.course-item .course-info .course-author .ca-pic {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	float: left;
+}
+
+.course-item .course-info .course-author p {
+	padding-left: 0px;
+	margin-bottom: 0;
+	padding-top: 7px;
+	font-weight: 600;
+	text-align: center;
+	width: 100%;
+}
+
+.course-item .course-info .course-author p span {
+	color: #2bcbbf;
+}
+
+.course-author-btn{
+	color: #fff;
+	font-size: 20px;
+}
+
+.course-author-btn:hover{
+	color: #f5f5f5;
+}
+
+.course-item.featured-course {
+	position: relative;
+	margin-bottom: 97px;
+}
+
+.course-item.featured-course:last-child {
+	margin-bottom: 30px;
+}
+
+.course-item.featured-course:nth-child(2n) .course-thumb {
+	left: auto;
+	right: 0;
+}
+
+.course-item.featured-course .course-thumb {
+	position: absolute;
+	width: 50%;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+
+.course-item.featured-course .fet-note {
+	display: inline-block;
+	background: #2bcbbf;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+	padding: 4px 15px;
+	margin-bottom: 20px;
+}
+
+.course-item.featured-course .course-info .course-text {
+	padding: 70px 33px 25px;
+}
+
+.course-item.featured-course .course-info .course-text h5 {
+	margin-bottom: 20px;
+}
+
+.course-item.featured-course .course-info .course-author {
+	border-top: none;
+	padding: 14px 33px 60px;
+}
+
+.course-filter {
+	list-style: none;
+	text-align: center;
+	padding-top: 50px;
+	margin-bottom: 60px;
+}
+
+.course-filter li {
+	display: inline-block;
+	font-size: 18px;
+	font-weight: 600;
+	color: #474747;
+	padding: 12px 10px 5px;
+	margin: 0 10px;
+	border-bottom: 4px solid transparent;
+	cursor: pointer;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.course-filter li.mixitup-control-active {
+	color: #ff712e;
+	border-bottom: 4px solid #ff712e;
+}
+
+
+/*------------------
+  Responsivo
+---------------------*/
+
+@media (min-width: 1200px) {
+	.container {
+		max-width: 1180px;
+	}
+}
+
+@media (max-width: 1705px) {
+	.realated-courses .owl-next {
+		position: relative;
+		margin: 0 auto;
+		left: 0;
+	}
+}
+
+/*Tela Média : 992px. */
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	.main-menu ul li a {
+		margin-left: 38px;
+	}
+	.header-btn {
+		min-width: 160px;
+	}
+	.hero-text h2 {
+		font-size: 55px;
+	}
+	
+	.text-logo{
+		font-size: 2.3em;
+	}
+	
+}
+
+/* Tablete :768px. */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+	.text-logo{
+		font-size: 2em;
+	}
+	
+	.svg-logo{
+		width: 50px;
+		height: 50px
+	}
+	
+	.site-logo{
+		margin-top: 15px;
+		width: 180px
+	}	
+	.section-title {
+		padding: 0;
+	}
+	.main-menu ul li a {
+		margin-left: 20px;
+	}
+	.header-btn {
+		min-width: 80px;
+		height: 50px;
+	}
+	.hero-text h2 {
+		font-size: 43px;
+	}
+	.section-title .info {
+		font-size: 35px;
+	}
+	.section-title h2 {
+		font-size: 40px;
+	}
+	.history-page .color-bg{
+		height: 100px;
+	}
+	.curse-page .color-bg{
+		display: none;
+	}
+	.curse-page .col-lg-6 {
+		background-image: url(../img/bg-orange.jpg);
+		padding: 50px;
+	}
+}
+
+/* Celular Largo :480px. */
+
+@media only screen and (max-width: 767px) {
+	.section-title {
+		padding: 0;
+	}
+	.section-title h2 {
+		font-size: 35px;
+	}
+	.header-btn {
+		display: none;
+	}
+	.nav-switch {
+		display: block;
+		float: right;
+		color: #000;
+		font-size: 25px;
+		width: 40px;
+		height: 40px;
+		background: #2bcbbf;
+		text-align: center;
+		padding-top: 2px;
+		-webkit-box-shadow: 0 0 13px rgba(0, 0, 0, 0.25);
+		box-shadow: 0 0 13px rgba(0, 0, 0, 0.25);
+	}
+	.main-menu {
+		background: #fff;
+		margin-top: 22px;
+		position: absolute;
+		width: 100%;
+		left: 0;
+		top: 100%;
+		display: none;
+		z-index: 999;
+	}
+	.main-menu ul li {
+		display: block;
+	}
+	.main-menu ul li a {
+		margin-left: 0;
+		padding: 17px 25px;
+		border-bottom: 1px solid #e8e8e8;
+		display: block;
+		color: #474747;
+	}
+	.hero-text {
+		margin-bottom: 50px;
+	}
+	.hero-text h2 {
+		font-size: 40px;
+	}
+	.history-page .color-bg{
+		height: 100px;
+	}
+	.curse-page .color-bg{
+		display: none;
+	}
+	.spad{
+		margin: 0px;
+		padding: 0px;
+	}
+	.curse-page .col-lg-6 {
+		background-image: url(../img/bg-orange.jpg);
+		padding: 50px;
+		margin-bottom: 20px;
+	}
+	
+}
+
+/* Celular Médio :480px. */
+
+@media only screen and (max-width: 576px) {
+	.hero-section {
+		height: 600px;
+	}
+	.hero-section .hero-text h2{
+		margin-top: -30px;
+	}
+
+	.contact-form {
+		padding: 30px;
+	}
+  .history-page .color-bg{
+		height: 70px;
+	}
+	.spad{
+		margin: 0px;
+		padding: 0px;
+	}
+	.curse-page .col-lg-6 {
+		background-image: url(../img/bg-orange.jpg);
+		padding: 50px;
+		margin-bottom: 20px;
+	}
+}
+
+/* Celular Pequeno :320px. */
+
+@media only screen and (max-width: 479px) {
+	.section-title h2 {
+		font-size: 30px;
+	}
+	.section-title .info{
+		font-size: 10px;
+	}
+	.contact-form {
+		padding: 20px;
+	}
+	.contact-form-warp {
+		padding: 40px 15px;
+	}
+	.contact-form-warp .contact-form {
+		padding: 50px 15px 40px;
+	}
+	.contact-form .site-btn {
+		min-width: auto;
+		padding: 17px 20px;
+	}
+	.contact-info-area .phone-number {
+		margin-bottom: 50px;
+	}
+	.contact-info-area .phone-number h2 {
+		font-size: 24px;
+	}
+	.contact-info-area .contact-list {
+		padding-left: 8px;
+	}
+	.footer-bottom .copyright{
+		font-size: 14px;
+	}
+	.footer-bottom .footer-menu a{
+		font-size: 12px;
+		margin: 0px;
+	}
+	
+	.history-page .color-bg{
+		height: 50px;
+	}
+	.spad{
+		margin: 0px;
+		padding: 0px;
+	}
+	.curse-page .col-lg-6 {
+		background-image: url(../img/bg-orange.jpg);
+		padding: 20px;
+		margin-bottom: 20px;
+	}
+	
+/*------------------
+  História da Auxilium
+---------------------*/
+
+.history-page{
+}
+.history-page .color-bg{
+	background-image: url(../img/bg-orange.jpg);
+}
+.history-page .history-content {
+	background-color: #fff;
+	padding: 5px;
+} 
+
+/*------------------
+  Cursos da Auxilium
+---------------------*/
+
+.curse-page .curse-content {
+	background-color: #fff;
+	padding: 20px;
+} 
+	.curse-page .container .title{
+		font-size: 40px;
+	}
+	.curse-content h2{
+		font-size: 24px;
+	}	
+	.curse-content p{
+		font-size: 12px;
+	}	
+.curse-content .contact-list {
+	list-style: none;
+	padding-left: 50px;
+}
+.curse-content .contact-list li {
+	margin-bottom: 10px;
+	margin-left: -30px;
+	position: relative;
+	padding-left: 10px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #878787;
+}
+.curse-content a{
+	display: inline-block;
+	min-width: 50px;
+	text-align: center;
+	border: none;
+	padding: 15px 10px;
+	font-weight: 600;
+	font-size: 16px;
+	position: relative;
+	color: #fff;
+	cursor: pointer;
+	background: #2bcbbf;
+}
+.curse-btn{
+	color: #fff;
+}
+/*------------------
+  Inspiração
+---------------------*/
+.inpiration-page{
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
+}
+.embed {
+	position: relative;
+	width: 100%;
+	padding-bottom: 56.25%;
+}
+
+.embed .video div{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.inpiration-page .col-lg-8 {
+	background-image: url(../img/bg-orange.jpg);
+	padding: 20px;
+	height: 200px;
+	margin: 50px auto;
+}
+.curse-page .container .title{
+		font-size: 40px;
+	}	
+
+
+/*------------------
+  Cabeçalho
+---------------------*/
+
+.footer-section {
+	margin-top: -50px;
+}
+
+.footer-warp {
+	max-width: 1559px;
+	padding: 0 30px;
+	margin: 0 auto;
+}
+
+.footer-bottom {
+	overflow: hidden;
+	background: #ff712f;
+	padding: 20px 0;
+	margin-top: 50px;
+}
+
+.footer-menu li a {
+	display: inline-block;
+	font-size: 12px;
+	font-weight: 600;
+	color: #fff;
+	padding-right: 5px;
+	margin-right: 5px;
+	position: relative;
+}
+
+.footer-menu li a:after {
+	position: absolute;
+	content: "|";
+	right: 0;
+	top: 0;
+}
+
+.copyright {
+	padding-top: 1px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #fff;
+}
+}
+
+
