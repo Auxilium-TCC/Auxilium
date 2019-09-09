@@ -1,0 +1,22 @@
+{
+  "name": "gruveo-embed-api-examples",
+  "version": "1.0.0",
+  "description": "Gruveo Embed API Examples",
+  "author": {
+    "email": "developers@gruveo.com",
+    "name": "Gruveo Ltd.",
+    "url": "https://www.gruveo.com"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./server"
+  },
+  "dependencies": {
+    "base64-stream": "1.0.0",
+    "cors": "2.8.5",
+    "express": "4.16.4"
+  },
+  "devDependencies": {
+    "eslint": "5.12.0"
+  }
+}
