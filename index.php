@@ -1,81 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<title>Auxilium</title>
-	<meta charset="UTF-8">
-	<meta name="theme-color" content="#2bcbbf">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<?php 
 
-	<!-- Icone CabeÃ§alho -->   
-
-	<!-- Fontes -->
-	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet"> 
-	<!-- Estilos -->
-	<link rel="stylesheet" href="css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="css/font-awesome.min.css"/>
-	<link rel="stylesheet" href="css/owl.carousel.css"/>
-	<link rel="stylesheet" href="css/style.css"/>
-
-</head>
-<body>
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
-
-	<header class="header-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-3">
-					<div class="site-logo" style="margin-top: -10px;">
-						<img src="./img/logo.svg" width="70px" height="70px" style="margin-top: -20px;">
-						<a href="" style="font-family: Lobster; font-size: 3em; color: #fff;">Auxilium</a>
-					</div>
-					<div class="nav-switch">
-						<i class="fa fa-bars"></i>
-					</div>
-				</div>
-				<div class="col-lg-9 col-md-9">
-					<?php
-
-						session_start();
-
-						if($_SESSION){
-
-							include_once "./login/perfil.php";	
-
-						}else{
-
-							echo("<a href='login/index.php' class='site-btn header-btn'>Login</a>");
-
-						}
-
-					?>
-					<nav class="main-menu">
-						<ul>
-							<li><a href="index.php">Inicio</a></li>
-							<li><a class="link_interno" href="#about">Sobre nós</a></li>
-							<li><a class="link_interno" href="#curses">Curso</a></li>
-							<li><a class="link_interno" href="#inspiration">Inspiração</a></li>
-							<li><a class="link_interno" href="#contact">Contato</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</header>
+	$TituloPag = 'Início';
+	$TituloBanner = 'Auxilium';
+	$Descricao = 'Nunca é tarde para aprender. Aproveite quando e onde quiser!';
+	
+	include_once './includes/header.php';
 
 
-
-	<section class="hero-section set-bg" data-setbg="img/bg-teste.png">
-		<div class="container">
-			<div class="hero-text text-white">
-				<h2>Auxilium</h2>
-				<p>Nunca é tarde para aprender. Aproveite quando e onde quiser!</p>
-			</div>
-		</div>
-	</section>
-
+?>
 
 	<section class="history-page spad pb-0" id="about">
 		<div class="container">
@@ -102,12 +34,12 @@
 					<div class="curse-content text-left">
 						<h2>Curso básico de Libras</h2>
 						<br>
-						<p>Curso focado em ensinar o bÃ¡sico sobre a linguagem brasileira de sinais.</p>
+						<p>Curso focado em ensinar o básico sobre a linguagem brasileira de sinais.</p>
 						<ul class="contact-list">
 							<li>Simples</li>
 							<li>Rápido</li>
 						</ul>
-						<a class="curse-btn site-btn" href="curso.php">Saiba Mais</a>
+						<a class="curse-btn site-btn" href="cursos.php">Saiba Mais</a>
 					</div>
 				</div>
 				<div class="col-lg-6 color-bg"></div>
@@ -118,7 +50,7 @@
 
 	<section class="inpiration-page spad pb-0" id="inspiration">
 		<div class="container">
-			<h2 class="title" style="margin: 70px 0px 0px 0px;">InspiraÃ§Ã£o</h2>
+			<h2 class="title" style="margin: 70px 0px 0px 0px;">Inspiração</h2>
 			<div class="row">
 				<div class="col-lg-8 embed"><div id="player"></div></div>
 			</div>
@@ -133,7 +65,7 @@
 					<div class="contact-form-warp">
 						<div class="section-title text-white text-left">
 							<h2>Entrar em contato</h2>
-							<p>Tire dÃºvidas ou dÃª sugestÃµes para a melhora do site. </p>
+							<p>Tire dúvidas ou dê sugestões para a melhora do site. </p>
 						</div>
 						<form class="contact-form">
 							<input type="text" placeholder="Seu Nome">
@@ -166,20 +98,12 @@
 		<br>
 	</section>
 
-
-	<footer class="footer-section">
-		<div class="footer-bottom">
-			<div class="footer-warp">
-				<ul class="footer-menu">
-					<li><a href="#">Termos e Condições</a></li>
-					<li><a href="#">Privacidade</a></li>
-				</ul>
-				<div class="copyright">&copy;AUXILIUM | <script>document.write(new Date().getFullYear());</script> </div>
-			</div>
-		</div>
-	</footer> 
-
-
+	<?php 
+	
+		include_once './includes/footer.php'; 
+	
+	?>
+	
 	<!--====== Javascripts & Jquery ======-->
 
 	<script>
@@ -225,11 +149,11 @@
       }
     </script>
 
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/circle-progress.min.js"></script>
-	<script src="js/main.js"></script>
-	<script src="js/app.js"></script>
-	<script src="js/dashboard.js"></script>
+	<script src="./javascript/jquery-3.2.1.min.js"></script>
+	<script src="./javascript/bootstrap.min.js"></script>
+	<script src="./javascript/circle-progress.min.js"></script>
+	<script src="./javascript/main.js"></script>
+	<script src="./javascript/app.js"></script>
+	<script src="./javascript/dashboard.js"></script>
 </body>
 </html>

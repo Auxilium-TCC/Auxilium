@@ -1,10 +1,14 @@
-@font-face {
-  font-family: Lobster;
-  src: url(fonts/lobster.woff2) format(woff2);
-}
+
 /*----------------------------------------*/
 /* Padrão de CSS
 /*----------------------------------------*/
+
+@font-face {
+ font-family:'Lobster';
+ font-style:normal;
+ font-weight:900;
+ src:url(../fonts/Lobster.woff) format("woff");
+}
 
 html,
 body {
@@ -419,10 +423,11 @@ ol {
 }
 
 .signup-form input[type=text],
-.signup-form input[type=email],
+.signup-form input[type=password],
 .signup-form textarea,
 .contact-form input[type=text],
 .contact-form input[type=email],
+.contact-form input[type=password],
 .contact-form textarea {
 	height: 57px;
 	width: 100%;
@@ -435,10 +440,41 @@ ol {
 	background: #edf4f6;
 }
 
+.contact-form input[type=number],
+.contact-form input[type=file],
+.contact-form .complemento,
+.contact-form .bairro,
+.contact-form .estado,
+.contact-form textarea {
+	height: 57px;
+	width: 30%;
+	padding: 0 30px;
+	margin-bottom: 27px;
+	margin-right: 10px;
+	border: none;
+	font-size: 14px;
+	font-weight: 500;
+	background: #edf4f6;
+}
+
+.contact-form .endereco {
+	height: 57px;
+	width: 67.43%;
+	padding: 0 30px;
+	margin-bottom: 27px;
+	margin-right: 10px;
+	border: none;
+	font-size: 14px;
+	font-weight: 500;
+	background: #edf4f6;
+}
+
 .signup-form input[type=text]:focus,
+.signup-form input[type=password]:focus,
 .signup-form input[type=email]:focus,
 .signup-form textarea:focus,
 .contact-form input[type=text]:focus,
+.contact-form input[type=password]:focus,
 .contact-form input[type=email]:focus,
 .contact-form textarea:focus {
 	border-bottom: 2px solid #ff712f;
@@ -446,7 +482,6 @@ ol {
 
 .signup-form input[type=file],
 .contact-form input[type=file] {
-	display: none;
 }
 
 .signup-form textarea,
@@ -462,7 +497,6 @@ ol {
 }
 
 .contact-page{
-	background: #f5f5f5;
 }
 
 .contact-form-warp {
