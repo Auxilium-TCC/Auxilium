@@ -1,0 +1,18 @@
+USE auxiliumDB;
+
+INSERT INTO `usuario` (`NOME_USUARIO`, `APELIDO_USUARIO`, `EMAIL_USUARIO`, `SENHA_USUARIO`, `IMAGEM_USUARIO`, `CEP_USUARIO`, `ESTADO_USUARIO`, `CIDADE_USUARIO`, `BAIRRO_USUARIO`, `ENDERECO_USUARIO`, `NUMRESIDENCIA_USUARIO`, `COMPLEMENTO_USUARIO`, `RANK_USUARIO`) VALUES ('Aline Firmino Brito', 'Aline', 'aline.firmino@email.com', md5('1234'), NULL, '12302-210', 'SP', 'Jacareí', 'Rio Comprido', 'Estrada Rio Comprido', '135', NULL, '1');
+INSERT INTO `usuario` (`NOME_USUARIO`, `APELIDO_USUARIO`, `EMAIL_USUARIO`, `SENHA_USUARIO`, `IMAGEM_USUARIO`, `CEP_USUARIO`, `ESTADO_USUARIO`, `CIDADE_USUARIO`, `BAIRRO_USUARIO`, `ENDERECO_USUARIO`, `NUMRESIDENCIA_USUARIO`, `COMPLEMENTO_USUARIO`, `RANK_USUARIO`) VALUES ('Veridiana Ferreira', 'Veridi', 'veridiana.ferreira@email.com', md5('1234'), NULL, '78015-500', 'Mato Grosso', 'Cuiabá', 'Dom Aquino', 'Avenida Tenente-Coronel Duarte', '531', 'Casa 3', '0');
+
+INSERT INTO `curso` (`ID_USUARIO`, `TITULO_CURSO`, `DESCRICAO_CURSO`, `TEMPOESTIMADO_CURSO`, `IMAGEM_CURSO`) VALUES ('1', 'Soletrando em Libras', 'Aprendendo a soletrar em Libras', '15', NULL);
+INSERT INTO `curso` (`ID_USUARIO`, `TITULO_CURSO`, `DESCRICAO_CURSO`, `TEMPOESTIMADO_CURSO`, `IMAGEM_CURSO`) VALUES ('1', 'Contando em Libras', 'Aprendendo a Contar em Libras', '7', NULL);
+
+INSERT INTO `compra` (`ID_USUARIO`, `VALOR_COMPRA`, `DATA_COMPRA`, `VENCIMENTO_COMPRA`, `VERIFICACAO_COMPRA`) VALUES ('2', '29.90', '2019-09-16', '2019-10-16', '1');
+
+INSERT INTO `nivel` (`ID_CURSO`, `TITULO_NIVEL`) VALUES ('1', 'Iniciante');
+INSERT INTO `nivel` (`ID_CURSO`, `TITULO_NIVEL`) VALUES ('2', 'Iniciante');
+
+INSERT INTO `modulo` (`ID_NIVEL`, `TITULO_MODULO`, `DESCRICAO_MODULO`) VALUES ('1', 'Aula 1', 'Primeira Aula');
+INSERT INTO `modulo` (`ID_NIVEL`, `TITULO_MODULO`, `DESCRICAO_MODULO`) VALUES ('2', 'Aula 1', 'Primeira Aula');
+
+INSERT INTO `conteudo` (`ID_MODULO`, `CONTEUDO_CONTEUDO`) VALUES ('1', NULL);
+INSERT INTO `conteudo` (`ID_MODULO`, `CONTEUDO_CONTEUDO`) VALUES ('2', NULL);

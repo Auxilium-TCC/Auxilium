@@ -3,8 +3,15 @@
 include_once "../../../classes/DataBase.class.php";
 
 session_start();
+$BD = new DataBase();
 
-$DB = new DataBase();
+if($_SESSION == NULL){
+    
+    $BD->Erro("Não Logado!");
+    die(header("Refresh: 0.11;url=/Auxilium/index.php"));
+    
+}
+
 $Imagem = base64_encode($_SESSION['imagem']);
 
 ?>
@@ -146,7 +153,7 @@ $Imagem = base64_encode($_SESSION['imagem']);
                             <div class="page-title-wrapper">
                                 <div class="page-title-heading">
                                     <div class="page-title-icon">
-                                        <i class="pe-7s-car icon-gradient bg-mean-fruit"></i>
+                                        <i class="pe-7s-play icon-gradient bg-mean-fruit"></i>
                                     </div>
                                 </div>
                                 <div class="page-title-actions">
@@ -164,7 +171,7 @@ $Imagem = base64_encode($_SESSION['imagem']);
                                                         <label class="nav-link">
                                                             <i class="nav-link-icon lnr-inbox"></i>
                                                             <span>
-                                                                <a href='acao_curso.php'>Cadastrar</a>
+                                                                <a class='site-btn' href='acao_curso.php'>Cadastrar</a>
                                                             </span>
                                                             <!-- <div class="ml-auto badge badge-pill badge-secondary">86</div> -->
                                                         </label>
@@ -173,15 +180,15 @@ $Imagem = base64_encode($_SESSION['imagem']);
                                                         <label class="nav-link">
                                                             <i class="nav-link-icon lnr-book"></i>
                                                             <span>
-                                                                <input type='submit' name='Acao' value='Alterar'></input>
+                                                                <input class='site-btn' type='submit' name='Acao' value='Alterar'></input>
                                                             </span>
                                                         </label>
                                                     </li>
                                                     <li class="nav-item">
                                                         <label class="nav-link">
                                                             <i class="nav-link-icon lnr-picture"></i>
-                                                            <span>
-                                                                <input type='submit' name='Acao' value='Excluir'></input>
+                                                            <span class='Site-btn'>
+                                                                <input class='site-btn' type='submit' name='Acao' value='Excluir'></input>
                                                             </span>
                                                             <div class="ml-auto badge badge-pill badge-danger">!</div>
                                                         </label>
@@ -252,7 +259,7 @@ $Imagem = base64_encode($_SESSION['imagem']);
                                         <td align='center'>{$Campo["TEMPOESTIMADO_CURSO"]} Dia(s)</td>
                                         <td align='center'>{$Niveis}</td>
                                         <td align='center'>{$Modulos}</td>
-                                        <td align='center'><a href=''>Visualizar</a></td>
+                                        <td align='center'><a href='/Auxilium/cursos/curso_{$Campo['ID_CURSO']}.php'>Visualizar</a></td>
                                             
                                     </tr>
                                 

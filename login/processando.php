@@ -7,14 +7,20 @@ session_start();
 
 $BD = new DataBase;
 $Acao = "Cadastro";
-$Imagem = file_get_contents("../img/logo_maos.png");
+
 
 if(isset($_REQUEST['Acao'])){
     
     $Acao = $_REQUEST['Acao'];
+    
+}
+
+if(isset($_REQUEST['ID'])){
+    
     $IDCurso = $_REQUEST['ID'];
     
 }
+
 
 if(isset($_REQUEST['Curso'])){
     
@@ -22,9 +28,18 @@ if(isset($_REQUEST['Curso'])){
     $Descricao = $BD->ValidaDescricao(htmlspecialchars($_REQUEST['Descricao']), ENT_QUOTES, 'UTF-8');
     $TempoEstimado = $BD->ValidaTempoEstimado(htmlspecialchars($_REQUEST['TempoEstimado']), ENT_QUOTES, 'UTF-8');
         
-    if($_FILES['Imagem']['name'] != ""){
-                
-        $Imagem = file_get_contents($_FILES['Imagem']['tmp_name']);  
+    if($_FILES['Imagem']['name'] != "" && $Acao != "Excluir"){
+        
+        $Imagem = file_get_contents($_FILES['Imagem']['tmp_name']);
+        
+    }elseif($Acao == 'Alterar' && $_FILES['Imagem']['name'] == ""){
+        
+        $Imagem = "N/A";
+        
+    }else{
+        
+        $Imagem = file_get_contents("../img/logo_maos.png");
+        die("Deu errado");
         
     }
     
@@ -62,7 +77,7 @@ if(isset($_REQUEST['Curso'])){
         if($_SESSION != NULL){
             
             $BD->Erro("Já Logado!");
-            die(header("Refresh: 0.11;url=../index.php"));
+            die(header("Refresh: 0.1;url=../index.php"));
             
         }
         
@@ -70,10 +85,7 @@ if(isset($_REQUEST['Curso'])){
         
     }elseif($Acao == "Sair"){
         
-        session_destroy();
-        $_SESSION = NULL;
-        echo("<script>alert('Deslogado com sucesso!')</script>");
-        die(header("Refresh: 0.11;url=../index.php"));
+        $BD->Sair();
         
     }
     
@@ -105,9 +117,17 @@ if(isset($_REQUEST['Curso'])){
         
     }
 
-    if(isset($_FILES['Imagem'])){
+    if($_FILES['Imagem']['name'] != ""){
         
         $Imagem = file_get_contents($_FILES['Imagem']['tmp_name']);
+        
+    }elseif($Acao == 'Alterar' && $_FILES['Imagem']['name'] == ""){
+        
+        $Imagem = "N/A";
+        
+    }else{
+        
+        $Imagem = file_get_contents("../img/logo_maos.png");
         
     }
     
@@ -124,7 +144,7 @@ if(isset($_REQUEST['Curso'])){
     }
     
     if($Acao == "Cadastro"){
-        
+		
         $Resposta = $BD->CadastrarUsuario($Nome, $Apelido, $Email, $Senha, $Imagem, $CEP, $Endereco, $Bairro, $Cidade, $Estado, $NumResidencia, $Complemento, $Rank);
         
         if($Resposta != NULL){
@@ -135,11 +155,13 @@ if(isset($_REQUEST['Curso'])){
         
     }elseif($Acao == "Alterar"){
         
-        $BD->AlterarUsuario($ID, $Nome, $Apelido, $Email, $Senha, $Imagem, $CEP, $Endereco, $Bairro, $Cidade, $Estado, $NumResidencia, $Complemento, $Rank);
+        $IDUsuario = $_REQUEST['IDUsuario'];
+        $BD->AlterarUsuario($IDUsuario, $Nome, $Apelido, $Email, $Imagem, $CEP, $Endereco, $Bairro, $Cidade, $Estado, $NumResidencia, $Complemento, $Rank);
         
     }elseif($Acao == "Excluir"){
         
-        $BD->ExcluirUsuario($ID);
+        $IDUsuario = $_REQUEST['IDUsuario'];
+        $BD->ExcluirUsuario($IDUsuario);
         
     }else{
         

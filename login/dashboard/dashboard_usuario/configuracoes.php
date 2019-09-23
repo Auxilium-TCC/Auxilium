@@ -1,10 +1,24 @@
-<?php echo 
+<?php echo
 
-/*include_once './classes/DataBase.class.php';*/
+include_once '../../../classes/DataBase.class.php';
 session_start();
 
-/*$DB = new DataBase();*/
-$Imagem = base64_encode($_SESSION['imagem']);
+if($_SESSION == NULL){
+    
+    include_once '../classes/DataBase.class.php';
+    
+    $BD = new DataBase();
+    
+    $BD->Erro("NÃ£o Logado!");
+    die(header("Refresh: 0.11;url=../index.php"));
+    
+}
+
+
+$BD = new DataBase();
+
+$Dados = $BD->BuscaUsuario($_SESSION['id']);
+$Imagem = base64_encode($Dados['IMAGEM_USUARIO']);
 
 ?>
 
@@ -17,7 +31,7 @@ $Imagem = base64_encode($_SESSION['imagem']);
         <meta http-equiv='Content-Language' content='pt-BR'>
         <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
         <link rel="shortcut icon" href="../../../img/favicon.ico" />
-        <title>Auxilium | Configurações</title>
+        <title>Auxilium | ConfiguraÃ§Ãµes</title>
         <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no' />
         <link href='https://fonts.googleapis.com/css?family=Lobster&display=swap' rel='stylesheet'> 
         <meta name='msapplication-tap-highlight' content='no'>
@@ -70,8 +84,8 @@ $Imagem = base64_encode($_SESSION['imagem']);
                                                 <i class='fa fa-angle-down ml-2 opacity-8'></i>
                                             </a>
                                             <div tabindex='-1' role='menu' aria-hidden='true' class='dropdown-menu dropdown-menu-right'>
-                                                <button type='button' tabindex='0' class='dropdown-item'>Conta do Usuário</button>
-                                                <button type='button' tabindex='0' class='dropdown-item'>Configurações</button>
+                                                <button type='button' tabindex='0' class='dropdown-item'>Conta do UsuÃ¡rio</button>
+                                                <button type='button' tabindex='0' class='dropdown-item'>ConfiguraÃ§Ãµes</button>
                                             </div>
                                         </div>
                                     </div>
@@ -130,14 +144,14 @@ $Imagem = base64_encode($_SESSION['imagem']);
                                     </a>
                                 </li>
                                 <li>
-                                    <a href='' class=''>
+                                    <a href='webchamada.php' class=''>
                                         <i class='metismenu-icon pe-7s-chat'></i>
                                         Web Chamada
                                     </a>
                                 </li>
-                                <li class='app-sidebar__heading'>Ações</li>
+                                <li class='app-sidebar__heading'>AÃ§Ãµes</li>
                                     <li>
-                                        <a href=''>
+                                        <a href='../../../cursos.php'>
                                             <i class='metismenu-icon pe-7s-play'></i>Ver Cursos
                                         </a>
                                     </li>
@@ -156,10 +170,9 @@ $Imagem = base64_encode($_SESSION['imagem']);
                                 <div class='page-title-wrapper'>
                                     <div class='page-title-heading'>
                                         <div class='page-title-icon-user'>
-                                            <img width='100%' height='100%' class='' src='data:image/jpeg;base64,<?php echo $Imagem?>' alt='Sua foto de perfil'>
+											<img width='170px' height='170px' src='data:image/jpeg;base64,<?php echo($Imagem); ?>' alt="">
                                         </div>
-                                        <div><?php echo  $_SESSION['nome'] ?>
-                                        </div>
+                                        <div style='margin-left: 100px;'><?php echo($Dados['NOME_USUARIO']); ?></div>
                                     </div>
                                     <div class='page-title-actions'>
                                         <div class='d-inline-block'>
@@ -169,35 +182,47 @@ $Imagem = base64_encode($_SESSION['imagem']);
                             </div>
                             
                              <div class='main-card mb-3 card'>
-                                        <div class='card-body'><h5 class='card-title'>Informações</h5>
-                                            <form class=''>
+                             <?php 
+                                
+                                
+                             
+                             
+                             ?>
+                                        <div class='card-body'><h5 class='card-title'>InformaÃ§Ãµes</h5>
+                                            <form class='' action='../../processando.php' method='post' enctype="multipart/form-data">
+                                            <div class='position-relative form-group'><label for='exampleEmail11' class=''></label><input name='Imagem' type='file' class='form-control'></div>
+                                            <input type='hidden' name='IDUsuario' value='<?php echo($_SESSION['id']); ?>'>
+											<input type='hidden' name='ConfEmail' value='<?php echo($Dados['EMAIL_USUARIO']); ?>'>
+                                            <input type='hidden' name='Nome' value='<?php echo($Dados['NOME_USUARIO']); ?>'>
                                                 <div class='form-row'>
                                                     <div class='col-md-6'>
-                                                        <div class='position-relative form-group'><label for='exampleEmail11' class=''>Email</label><input name='email' id='exampleEmail11' placeholder='seunome@provedor.com' type='email' class='form-control' value='<?php echo $_SESSION['email']?> '></div>
+                                                        <div class='position-relative form-group'><label for='exampleEmail11' class=''>Email</label><input name='Email' id='exampleEmail11' placeholder='seunome@provedor.com' type='email' class='form-control' value='<?php echo $Dados['EMAIL_USUARIO']?> '></div>
                                                     </div>
                                                     <div class='col-md-6'>
-                                                        <div class='position-relative form-group'><label for='examplePassword11' class=''>Senha</label><input name='password' id='examplePassword11' placeholder='Sua senha' type='password' class='form-control'></div>
+                                                        <div class='position-relative form-group'><label for='' class=''>Apelido</label><input name='Apelido' id='' placeholder='Seu Apelido' type='text' class='form-control' value='<?php echo($Dados['APELIDO_USUARIO']);?>'></div>
                                                     </div>
                                                 </div>
-                                                <div class='position-relative form-group'><label for='exampleAddress' class=''>EndereÃ§o</label><input name='address' id='exampleAddress' placeholder='Av. Cruzeiro do Sul' type='text' class='form-control' value='<?php echo $_SESSION['endereco']?>'></div>
-                                                <div class='position-relative form-group'><label for='exampleAddress2' class=''>Complemento</label><input name='address2' id='exampleAddress2' placeholder='Casa, Apartamento, Escola' type='text' class='form-control' value='<?php echo $_SESSION['complemento']?>'>
+                                                <div class='position-relative form-group'><label for='exampleAddress' class=''>EndereÃ§o</label><input name='Endereco' id='exampleAddress' placeholder='Av. Cruzeiro do Sul' type='text' class='form-control' value='<?php echo $Dados['ENDERECO_USUARIO']?>'></div>
+                                                <div class='position-relative form-group'><label for='exampleAddress2' class=''>Bairro</label><input name='bairro' id='exampleAddress2' placeholder='Alto da Lapa' type='text' class='form-control' value='<?php echo $Dados['BAIRRO_USUARIO']?>'>
+                                                <div class='position-relative form-group'><label for='exampleAddress2' class=''>Cidade</label><input name='cidade' id='exampleAddress2' placeholder='SÃ£o Paulo' type='text' class='form-control' value='<?php echo $Dados['CIDADE_USUARIO']?>'>
+                                                <div class='position-relative form-group'><label for='exampleAddress2' class=''>Estado</label><input name='uf' id='exampleAddress2' placeholder='SP' type='text' class='form-control' value='<?php echo $Dados['ESTADO_USUARIO']?>'>
+                                                <div class='position-relative form-group'><label for='exampleAddress2' class=''>Complemento</label><input name='Complemento' id='exampleAddress2' placeholder='Casa, Apartamento, Escola' type='text' class='form-control' value='<?php echo $Dados['COMPLEMENTO_USUARIO']?>'>
                                                 </div>
                                                 <div class='form-row'>
                                                     <div class='col-md-6'>
-                                                        <div class='position-relative form-group'><label for='exampleCity' class=''>NÃºmero da ResidÃªncia</label><input name='Numresidencia' id='examplecity' type='text' class='form-control' placeholder='Ex.: 371' value='<?php echo $_SESSION['numresidencia']?>'></div>
+                                                        <div class='position-relative form-group'><label for='exampleCity' class=''>NÃºmero da ResidÃªncia</label><input name='NumResidencia' id='examplecity' type='text' class='form-control' placeholder='Ex.: 371' value='<?php echo $Dados['NUMRESIDENCIA_USUARIO']?>'></div>
                                                     </div>
                                                     <div class='col-md-2'>
-                                                        <div class='position-relative form-group'><label for='exampleZip' class=''>CEP</label><input name='zip' id='exampleZip' type='text' class='form-control' maxlength='8'placeholder='12345-678' value='<?php echo $_SESSION['cep']?>'></div>
+                                                        <div class='position-relative form-group'><label for='exampleZip' class=''>CEP</label><input name='CEP' id='exampleZip' type='text' class='form-control' maxlength='9'placeholder='12345-678' value='<?php echo $Dados['CEP_USUARIO']?>'></div>
                                                     </div>
                                                 </div>
-                                                <button class='mt-2 btn btn-primary'>Salvar</button>
+                                                <input type='submit' name='Acao' value='Alterar' class='mt-2 btn btn-primary'>
                                             </form>
                                         </div>
                                     </div>
                                     
                                     
-                            <button class='mb-2 mr-2 btn btn-lg btn-block' style="background-color: #ff0000; color: #fff;">Excluir Conta
-                                            </button>
+                            <input type='submit' class='mb-2 mr-2 btn btn-lg btn-block' name='Acao' style="background-color: #ff0000; color: #fff;" value='Excluir'>
                                             
                     <div class='app-wrapper-footer'>
                         <div class='app-footer'>
