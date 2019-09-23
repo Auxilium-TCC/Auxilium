@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION != NULL && $_SESSION['rank'] == 0){
+if($_SESSION != NULL){
     
     include_once '../classes/DataBase.class.php';
     

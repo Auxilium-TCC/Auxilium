@@ -57,46 +57,34 @@ class DataBase{
             $Processo->bindParam(':Residencia', $NumResidencia, PDO::PARAM_STR);
             $Processo->bindParam(':Complemento', $Complemento, PDO::PARAM_STR);
             $Processo->bindParam(':Rank', $Rank, PDO::PARAM_INT);
-            
-            try{
+
+            $Processo->execute();
+            $this->Desconexao();
                 
-                $Processo->execute();
+            if($_SESSION['rank'] == 1){
                 
-            }catch (Exception $ex){
+                die(header("Refresh: 0.1;url=./dashboard/dashboard_admin/index.php"));
                 
+            }else{
                 
-                
-            }finally{
-                
-                $this->Desconexao();
-                echo("<script>alert('Cadastrado com sucesso');</script>");
-                
-                if($_SESSION['rank'] == 1){
-                    
-                    die(header("Refresh: 0.1;url=./dashboard/dashboard_admin/index.php"));
-                    
-                }else{
-                    
-                    die(header("Refresh: 0.1;url=index.php"));
-                    
-                }
+                die(header("Refresh: 0.1;url=index.php"));
                 
             }
-            
+                            
         }
         
     }
     
-    public function AlterarUsuario($ID, $Nome, $Apelido, $Email, $Senha, $Imagem, $CEP, $Endereco, $Bairro, $Cidade, $Estado, $NumResidencia, $Complemento, $Rank){
-
-        if($this->Conexao() == true){
+    public function AlterarUsuario($IDUsuario, $Nome, $Apelido, $Email, $Imagem, $CEP, $Endereco, $Bairro, $Cidade, $Estado, $NumResidencia, $Complemento, $Rank){
             
-            $SQL = "UPDATE USUARIO SET 
+        if($this->Conexao() == true){
+                        
+            if($Imagem == "N/A"){
+            
+                $SQL = "UPDATE USUARIO SET 
                     NOME_USUARIO = :Nome, 
                     APELIDO_USUARIO = :Apelido, 
                     EMAIL_USUARIO = :Email, 
-                    SENHA_USUARIO = :Senha, 
-                    IMAGEM_USUARIO = :Imagem, 
                     CEP_USUARIO = :CEP, 
                     ENDERECO_USUARIO = :Endereco, 
                     BAIRRO_USUARIO = :Bairro, 
@@ -105,15 +93,36 @@ class DataBase{
                     NUMRESIDENCIA_USUARIO = :Residencia, 
                     COMPLEMENTO_USUARIO = :Complemento, 
                     RANK_USUARIO = :Rank 
-                    WHERE ID_USUARIO = :ID";
-
-            $Processo = $this->PDO->prepare($SQL);
-            $Processo->bindParam(":ID", $ID, PDO::PARAM_STR);
+                    WHERE ID_USUARIO = :IDUsuario";
+                
+                $Processo = $this->PDO->prepare($SQL);
+            
+            }else{
+                
+                $SQL = "UPDATE USUARIO SET
+                    NOME_USUARIO = :Nome,
+                    APELIDO_USUARIO = :Apelido,
+                    EMAIL_USUARIO = :Email,
+                    IMAGEM_USUARIO = :Imagem,
+                    CEP_USUARIO = :CEP,
+                    ENDERECO_USUARIO = :Endereco,
+                    BAIRRO_USUARIO = :Bairro,
+                    CIDADE_USUARIO = :Cidade,
+                    ESTADO_USUARIO = :Estado,
+                    NUMRESIDENCIA_USUARIO = :Residencia,
+                    COMPLEMENTO_USUARIO = :Complemento,
+                    RANK_USUARIO = :Rank
+                    WHERE ID_USUARIO = :IDUsuario";
+                
+                $Processo = $this->PDO->prepare($SQL);
+                $Processo->bindParam(':Imagem', $Imagem, PDO::PARAM_STR);
+               
+            }
+                            
+            $Processo->bindParam(":IDUsuario", $IDUsuario, PDO::PARAM_STR);
             $Processo->bindParam(":Nome", $Nome, PDO::PARAM_STR);
             $Processo->bindParam(":Apelido", $Apelido, PDO::PARAM_STR);
             $Processo->bindParam(':Email', $Email, PDO::PARAM_STR);
-            $Processo->bindParam(':Senha', $Senha, PDO::PARAM_STR);
-            $Processo->bindParam(':Imagem', $Imagem, PDO::PARAM_STR);
             $Processo->bindParam(':CEP', $CEP, PDO::PARAM_STR);
             $Processo->bindParam(':Endereco', $Endereco, PDO::PARAM_STR);
             $Processo->bindParam(':Bairro', $Bairro, PDO::PARAM_STR);
@@ -122,20 +131,17 @@ class DataBase{
             $Processo->bindParam(':Residencia', $NumResidencia, PDO::PARAM_STR);
             $Processo->bindParam(':Complemento', $Complemento, PDO::PARAM_STR);
             $Processo->bindParam(':Rank', $Rank, PDO::PARAM_INT);
-            
-            try{
+
+            $Processo->execute();
+            $this->Desconexao();
+
+            if($_SESSION['rank'] == 1){
                 
-                $Processo->execute();
-                
-            }catch (Exception $ex){
-                
-                
-                
-            }finally{
-                
-                $this->Desconexao();
-                echo("<script>alert('Alterado com sucesso');</script>");
                 die(header("Refresh: 0.1;url=dashboard/dashboard_admin/index.php"));
+                
+            }else{
+                
+                die(header("Refresh: 0.1;url=dashboard/dashboard_usuario/configuracoes.php"));
                 
             }
             
@@ -143,18 +149,50 @@ class DataBase{
         
     }
     
-    public function ExcluirUsuario($ID){
-        
-        $SQL = "DELETE FROM USUARIO WHERE ID_USUARIO = :ID";
+    public function ExcluirUsuario($IDUsuario){
         
         if($this->Conexao()){
+
+            $Dados = $this->BuscaCursos($IDUsuario); 	
+
+            foreach($Dados as $Curso){
+	
+                $Statement = "DELETE FROM CURSO WHERE ID_CURSO = :IDCurso";
+        
             
+				$Processo = $this->PDO->prepare($Statement);
+				$Processo->bindParam(":IDCurso", $Curso, PDO::PARAM_INT);
+				$Processo->execute();
+            
+            }
+						
+			$SQL = "DELETE FROM USUARIO WHERE ID_USUARIO = :IDUsuario";
+
+
             $Processo = $this->PDO->prepare($SQL);
-            $Processo->bindParam(":ID", $ID, PDO::PARAM_INT);
+            $Processo->bindParam(":IDUsuario", $IDUsuario, PDO::PARAM_INT);
             $Processo->execute();
             $this->Desconexao();
-            echo("<script>alert('Excluido com sucesso');</script>");
-            die(header("Refresh: 0.1;url=dashboard/dashboard_admin/index.php"));
+
+            if($_SESSION['id'] == $IDUsuario){
+                
+                $this->Sair();
+                
+            }
+            
+            if($_SESSION['rank'] == 1){
+                
+                die(header("Refresh: 0.1;url=dashboard/dashboard_admin/index.php"));
+                
+            }elseif($_SESSION['rank'] == 0){
+                
+                die(header("Refresh: 0.1;url=dashboard/dashboard_usuario/configuracoes.php"));
+                
+            }else{
+                
+                die(header("Refresh: 0.1;url=/Auxilium/index.php"));
+                
+            }
             
         }
         
@@ -166,37 +204,27 @@ class DataBase{
         
         if($this->Conexao()){
             
-            $SQL = "SELECT ID_USUARIO, NOME_USUARIO, EMAIL_USUARIO, IMAGEM_USUARIO, CEP_USUARIO, ENDERECO_USUARIO, NUMRESIDENCIA_USUARIO, COMPLEMENTO_USUARIO, RANK_USUARIO FROM USUARIO WHERE EMAIL_USUARIO = :Email AND SENHA_USUARIO = :Senha";
+            $SQL = "SELECT ID_USUARIO, NOME_USUARIO, APELIDO_USUARIO, EMAIL_USUARIO, IMAGEM_USUARIO, CEP_USUARIO, ENDERECO_USUARIO, BAIRRO_USUARIO, CIDADE_USUARIO, ESTADO_USUARIO, NUMRESIDENCIA_USUARIO, COMPLEMENTO_USUARIO, RANK_USUARIO FROM USUARIO WHERE EMAIL_USUARIO = :Email AND SENHA_USUARIO = :Senha";
             
             $Processo = $this->PDO->prepare($SQL);
             $Processo->bindParam(":Email", $Email, PDO::PARAM_STR);
             $Processo->bindParam(':Senha', $Senha, PDO::PARAM_STR);
+
+            $Processo->execute();
+            $Dados = $Processo->fetch(PDO::FETCH_ASSOC);
             
-            try{
+            if($Dados == NULL){
                 
-                $Processo->execute();
-                $Dados = $Processo->fetch(PDO::FETCH_ASSOC);
-                
-                if($Dados == NULL){
-                    
-                    $this->Erro("Login e/ou Senha incorretos");
-                    die(header("Refresh: 0.1;url=./index.php"));
-                    
-                }
-                
-                
-            }catch (Exception $ex){
-                
-                $this->Erro($ex->getMessage());
-                
-            }finally{
-                
-                $this->Desconexao();
-                $this->Sessao($Dados);
-                die(header("Refresh: 0.1;url=../index.php"));
+                $this->Erro("Login e/ou Senha incorretos");
+                die(header("Refresh: 0.1;url=./index.php"));
                 
             }
+
             
+            $this->Desconexao();
+            $this->Sessao($Dados);
+            die(header("Refresh: 0.1;url=../index.php"));
+                            
         }
         
     }
@@ -209,24 +237,17 @@ class DataBase{
             
             $Processo = $this->PDO->prepare($SQL);
             $Processo->bindParam(":Email", $Email, PDO::PARAM_STR);
+                            
+            $Processo->execute();
+            $Dados = $Processo->fetch(PDO::FETCH_ASSOC);
             
-            try{
+            if($Dados == NULL){
                 
-                $Processo->execute();
-                $Dados = $Processo->fetch(PDO::FETCH_ASSOC);
-                
-                if($Dados == NULL){
-                    
-                    $this->Erro("Informe um email não cadastrado");
-                    
-                }
-                
-                
-            }finally{
-                
-                return true;
+                $this->Erro("Informe um email não cadastrado");
                 
             }
+
+            return true;
             
         }
         
@@ -279,26 +300,20 @@ class DataBase{
             
             $Processo = $this->PDO->prepare($SQL);
             $Processo->bindParam(":ID", $ID, PDO::PARAM_STR);
+                            
+            $Processo->execute();
+            $Dados = $Processo->fetch(PDO::FETCH_ASSOC);
             
-            try{
+            if($Dados == NULL){
                 
-                $Processo->execute();
-                $Dados = $Processo->fetch(PDO::FETCH_ASSOC);
-                
-                if($Dados == NULL){
-                    
-                    $this->Erro("Usuário não encontrado");
-                    die(header("Refresh: 0.1;url=cadastro.php"));
-                    
-                }
-                
-                
-            }finally{
-                
-                return $Dados;
+                $this->Erro("Usuário não encontrado");
+                die(header("Refresh: 0.1;url=cadastro.php"));
                 
             }
             
+                            
+            return $Dados;
+                            
         }
         
     }
@@ -316,23 +331,12 @@ class DataBase{
             $Processo->bindParam(":Descricao", $Descricao, PDO::PARAM_STR);
             $Processo->bindParam(':TempoEstimado', $TempoEstimado, PDO::PARAM_STR);
             $Processo->bindParam(':Imagem', $Imagem, PDO::PARAM_STR);
+                            
+            $Processo->execute();
             
-            try{
-                
-                $Processo->execute();
-                
-            }catch (Exception $ex){
-                
-                
-                
-            }finally{
-                
-                $this->Desconexao();
-                echo("<script>alert('Cadastrado com sucesso');</script>");    
-                die(header("Refresh: 0.1;url=./dashboard/dashboard_admin/cursos.php"));
+            $this->Desconexao();
+            die(header("Refresh: 0.1;url=./dashboard/dashboard_admin/cursos.php"));
 
-            }
-            
         }
         
     }
@@ -341,36 +345,41 @@ class DataBase{
         
         if($this->Conexao() == true){
             
-            $SQL = "UPDATE CURSO SET
-            TITULO_CURSO = :Titulo,
-            DESCRICAO_CURSO = :Descricao,
-            TEMPOESTIMADO_CURSO = :TempoEstimado,
-            IMAGEM_CURSO = :Imagem
-            WHERE ID_CURSO = :IDCurso";
+            if($Imagem == "N/A"){
+                
+                $SQL = "UPDATE CURSO SET
+                    TITULO_CURSO = :Titulo,
+                    DESCRICAO_CURSO = :Descricao,
+                    TEMPOESTIMADO_CURSO = :TempoEstimado
+                    WHERE ID_CURSO = :IDCurso";
+                
+                $Processo = $this->PDO->prepare($SQL);
+                
+            }else{
+                
+                $SQL = "UPDATE CURSO SET
+                    TITULO_CURSO = :Titulo,
+                    DESCRICAO_CURSO = :Descricao,
+                    TEMPOESTIMADO_CURSO = :TempoEstimado,
+                    IMAGEM_CURSO = :Imagem
+                    WHERE ID_CURSO = :IDCurso";
+                
+                $Processo = $this->PDO->prepare($SQL);
+                $Processo->bindParam(':Imagem', $Imagem, PDO::PARAM_STR);
+                
+            }
             
-            $Processo = $this->PDO->prepare($SQL);
             $Processo->bindParam(":IDCurso", $IDCurso, PDO::PARAM_STR);
             $Processo->bindParam(":Titulo", $Titulo, PDO::PARAM_STR);
             $Processo->bindParam(":Descricao", $Descricao, PDO::PARAM_STR);
             $Processo->bindParam(':TempoEstimado', $TempoEstimado, PDO::PARAM_STR);
-            $Processo->bindParam(':Imagem', $Imagem, PDO::PARAM_STR);
-            
-            try{
+  
+            $Processo->execute();
+
+            $this->Desconexao();
+            echo("<script>alert('Alterado com sucesso');</script>");
+            die(header("Refresh: 0.1;url=dashboard/dashboard_admin/cursos.php"));
                 
-                $Processo->execute();
-                
-            }catch (Exception $ex){
-                
-                
-                
-            }finally{
-                
-                $this->Desconexao();
-                echo("<script>alert('Alterado com sucesso');</script>");
-                die(header("Refresh: 0.1;url=dashboard/dashboard_admin/cursos.php"));
-                
-            }
-            
         }
         
     }
@@ -386,24 +395,20 @@ class DataBase{
             $Processo->execute();
             $this->Desconexao();
             echo("<script>alert('Excluido com sucesso');</script>");
-            die(header("Refresh: 0.1;url=dashboard/dashboard_admin/cursos.php"));
-            
+			die(header("Refresh: 0.1;url=dashboard/dashboard_admin/cursos.php"));
+				            
         }
-        
-        return;
-        
+                
     }
         
-    public function BuscaDadosCursos($Inicio,$Limite){
+    public function BuscaDadosCursos(){
         
         if($this->Conexao()){
             
-            $SQL = "SELECT * FROM curso LIMIT {$Inicio}, {$Limite}";
+            $SQL = "SELECT * FROM curso";
             $Dados = null;
 
             $Processo = $this->PDO->prepare($SQL);
-            $Processo->bindParam(":Inicio", $Inicio, PDO::PARAM_STR);
-            $Processo->bindParam(":Limite", $Limite, PDO::PARAM_STR);
             
             $Processo->execute();
             $Dados = $Processo->fetchall(PDO::FETCH_ASSOC);
@@ -471,40 +476,173 @@ class DataBase{
         
     }
         
-    public function BuscaCurso($ID){
+    public function BuscaCurso($IDCurso){
         
         if($this->Conexao()){
             
-            $SQL = "SELECT * FROM CURSO WHERE ID_CURSO = :ID";
+            $SQL = "SELECT * FROM CURSO WHERE ID_CURSO = :IDCurso";
             
             $Processo = $this->PDO->prepare($SQL);
-            $Processo->bindParam(":ID", $ID, PDO::PARAM_STR);
+            $Processo->bindParam(":IDCurso", $IDCurso, PDO::PARAM_STR);
+ 
+            $Processo->execute();
+            $Dados = $Processo->fetch(PDO::FETCH_ASSOC);
             
-            try{
+            if($Dados == NULL){
                 
-                $Processo->execute();
-                $Dados = $Processo->fetch(PDO::FETCH_ASSOC);
-                
-                if($Dados == NULL){
-                    
-                    $this->Erro("Curso não encontrado");
-                    die(header("Refresh: 0.1;url=/Auxilium/cursos.php"));
-                                        
-                }
-                
-                
-            }finally{
-                
-                return $Dados;
+                $this->Erro("Curso não encontrado");
+                die(header("Refresh: 0.1;url=cadastro.php"));
                 
             }
-            
+
+            return $Dados;
+                            
         }
         
     }
+	
+	public function BuscaCursos($IDUsuario){
 
+		if($this->Conexao()){
+			
+			
+			$SQL = "SELECT ID_CURSO FROM curso WHERE ID_USUARIO = :IDUsuario";
+			$Dados = null;
+
+			$Processo = $this->PDO->prepare($SQL);
+			$Processo->bindParam(":IDUsuario", $IDUsuario, PDO::PARAM_STR);
+			
+			$Processo->execute();
+			$Dados = $Processo->fetchall(PDO::FETCH_ASSOC);
+			
+		}
+		
+		return $Dados;        
+		
+	}
+	
+	/* Funções dos Niveis */
+	
+	public function CadastrarNivel($IDCurso, $Titulo){
+			
+		if($this->Conexao() == true){
+			
+			$SQL = "INSERT INTO NIVEL (ID_CURSO, TITULO_NIVEL) VALUES (:IDCurso, :Titulo)";
+			$Processo = $this->PDO->prepare($SQL);
+			$Processo->bindParam(":IDCurso", $IDCurso, PDO::PARAM_STR);
+			$Processo->bindParam(":Titulo", $Titulo, PDO::PARAM_STR);
+	
+			$Processo->execute();
+
+			$this->Desconexao();
+			die(header("Refresh: 0.1;url=./dashboard/dashboard_admin/cursos.php"));
+			
+		}
+		
+	}	
+	
+	public function BuscaNiveis($IDCurso){
+	    
+	    if($this->Conexao()){
+	        
+	        $SQL = "SELECT * FROM NIVEL WHERE ID_CURSO = :IDCurso";
+	        $Dados = null;
+	        
+	        $Processo = $this->PDO->prepare($SQL);
+	        $Processo->bindParam(":IDCurso", $IDCurso, PDO::PARAM_STR);
+	        
+	        $Processo->execute();
+	        $Dados = $Processo->fetchall(PDO::FETCH_ASSOC);
+	        
+	    }
+	    
+	    return $Dados;
+	    	    
+	}
+	
+	/* Funções dos Módulos */
+	
+	public function CadastrarModulo($IDNivel, $Titulo, $Descricao){
+			
+			if($this->Conexao() == true){
+				
+			$SQL = "INSERT INTO MODULO (ID_NIVEL, TITULO_MODULO, DESCRICAO_MODULO) VALUES (:IDNivel, :Titulo, :Descricao)";
+			$Processo = $this->PDO->prepare($SQL);
+			$Processo->bindParam(":IDNivel", $IDNivel, PDO::PARAM_STR);
+			$Processo->bindParam(":Titulo", $Titulo, PDO::PARAM_STR);
+			$Processo->bindParam(":Descricao", $Descricao, PDO::PARAM_STR);
+
+			$Processo->execute();
+			
+			$this->Desconexao();
+			die(header("Refresh: 0.1;url=./dashboard/dashboard_admin/cursos.php"));
+				
+			}
+			
+		}
+		
+	public function BuscaModulos($IDNivel){
+	    
+	    if($this->Conexao()){
+	        
+	        
+	        $SQL = "SELECT * FROM MODULO WHERE ID_NIVEL = :IDNivel";
+	        $Dados = null;
+	        
+	        $Processo = $this->PDO->prepare($SQL);
+	        $Processo->bindParam(":IDNivel", $IDNivel, PDO::PARAM_STR);
+	        
+	        $Processo->execute();
+	        $Dados = $Processo->fetchall(PDO::FETCH_ASSOC);
+	        
+	    }
+	    
+	    return $Dados;
+	    
+	}
+		
+    /* Funções dos Conteúdos */
+		
+	public function CadastrarConteudo($IDModulo, $Arquivo){
+		
+		if($this->Conexao() == true){
+			
+		$SQL = "INSERT INTO CONTEUDO (ID_MODULO, CONTEUDO_CONTEUDO) VALUES (:IDModulo, :Conteudo)";
+		$Processo = $this->PDO->prepare($SQL);
+		$Processo->bindParam(":IDModulo", $IDModulo, PDO::PARAM_STR);
+		$Processo->bindParam(":Conteudo", $Arquivo, PDO::PARAM_STR);
+	
+		$Processo->execute();
+		$this->Desconexao();
+		
+		die(header("Refresh: 0.1;url=./dashboard/dashboard_admin/cursos.php"));
+			
+		}
+		
+	}
+		
+	public function BuscaConteudos($IDModulo){
+	    
+	    if($this->Conexao()){
+	        
+	        
+	        $SQL = "SELECT * FROM CONTEUDO WHERE ID_MODULO = :IDModulo";
+	        $Dados = null;
+	        
+	        $Processo = $this->PDO->prepare($SQL);
+	        $Processo->bindParam(":IDModulo", $IDModulo, PDO::PARAM_STR);
+	        
+	        $Processo->execute();
+	        $Dados = $Processo->fetchall(PDO::FETCH_ASSOC);
+	        
+	    }
+	    
+	    return $Dados;
+	    
+	}
+	
     /* Funções de Validação */
-    
+    	
     public function ValidaNome($Nome){
         
         $Nome = htmlspecialchars_decode($Nome);
@@ -702,18 +840,28 @@ class DataBase{
     }
     
     public function Sessao($Dados){
-        
-        session_start();
-        
+
         $_SESSION['id'] = $Dados['ID_USUARIO'];
         $_SESSION['nome'] = $Dados['NOME_USUARIO'];
+        $_SESSION['apelido'] = $Dados['APELIDO_USUARIO'];
         $_SESSION['email'] = $Dados['EMAIL_USUARIO'];
         $_SESSION['imagem'] = $Dados['IMAGEM_USUARIO'];
         $_SESSION['cep'] = $Dados['CEP_USUARIO'];
         $_SESSION['endereco'] = $Dados['ENDERECO_USUARIO'];
+        $_SESSION['bairro'] = $Dados['BAIRRO_USUARIO'];
+        $_SESSION['cidade'] = $Dados['CIDADE_USUARIO'];
+        $_SESSION['estado'] = $Dados['ESTADO_USUARIO'];
         $_SESSION['numresidencia'] = $Dados['NUMRESIDENCIA_USUARIO'];
         $_SESSION['complemento'] = $Dados['COMPLEMENTO_USUARIO'];
         $_SESSION['rank'] = $Dados['RANK_USUARIO'];
+        
+    }
+    
+    public function Sair(){
+        
+        session_destroy();
+        $_SESSION = NULL;
+        die(header("Refresh: 0.1;url=../index.php"));
         
     }
     
